@@ -13,7 +13,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const MapComponent = dynamic(() => import("@/app/Map"), { ssr: false });
+const MapComponent = dynamic(() => import("@/app/Components/Map"), { ssr: false });
 
 enum Steps {
     CATEGORY = 0,
@@ -40,6 +40,7 @@ const RentModel = () => {
     const [title , setTitle] = useState('');
     const [description , setDescription] = useState('');
     const [price , setPrice] = useState(1);
+    const [country , setCountry] = useState("");
 
     const router = useRouter();
 
@@ -103,6 +104,7 @@ const RentModel = () => {
             title,
             description,
             price,
+            country
         };
         
         axios.post("/api/Listing", payload)
@@ -185,6 +187,7 @@ const RentModel = () => {
                     )}
                     onChange={(option: any) => {
                         setLocation(option ? { lat: option.latlng[0], lng: option.latlng[1] } : null);
+                        setCountry(option);  // Update the country value as well
                     }}
                     classNames={{
                         control: () => "p-3 border-2",

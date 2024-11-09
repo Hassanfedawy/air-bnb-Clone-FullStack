@@ -22,7 +22,9 @@ export default function RootLayoutClient({
       <LogInModal/>
       <RentModel/>
       <Nav />
+      <div className="py-16">
       {children}
+      </div>
       </SessionProvider>
     </>
   );

@@ -31,18 +31,12 @@ const options: NextAuthOptions = {
 
                 const user = await User.findOne({ email: credentials.email });
                 if (user && (await bcrypt.compare(credentials.password, user.password))) {
-                    return { email: user.email, name: user.name } as UserType; // Ensure correct type here
+                    return {id:user._id , email: user.email, name: user.name } as UserType; // Ensure correct type here
                 }
                 return null;
             },
         }),
     ],
-    pages: {
-        signIn: '/auth/signin',
-        signOut: '/auth/signout',
-        error: '/auth/error',
-        verifyRequest: '/auth/verify-request',
-    },
     session: {
         strategy:"jwt"
     },
